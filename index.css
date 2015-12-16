@@ -1,0 +1,92 @@
+body {
+	background: url(faded_purple.jpg);
+	font-family: Georgia;
+}
+
+h1 {
+	text-align: center;
+}
+
+.container {
+	width: 1000px;
+	height: 1000px;
+	margin: 0 auto;
+}
+
+.one {
+	float:left;
+	border-bottom: 2px solid black;
+	border-right: 2px solid black;
+	height: 200px;
+	width: 200px;
+}
+
+.two {
+	float: left;
+	border-bottom: 2px solid black;
+	border-right: 2px solid black;
+	height: 200px;
+	width: 200px;
+}
+
+.three {
+	float: left;
+	border-bottom: 2px solid black;
+	height: 200px;
+	width: 200px;;
+}
+
+.four {
+	border-bottom: 2px solid black;
+	border-right: 2px solid black;
+	height: 200px;
+	width: 200px;
+	clear: left;
+	float: left;
+
+}
+
+.five {
+	border-bottom: 2px solid black;
+	border-right: 2px solid black;
+	height: 200px;
+	width: 200px;
+	float: left;
+}
+
+.six {
+	border-bottom: 2px solid black;
+	height: 200px;
+	width: 200px;
+	float: left;
+}
+
+.seven {
+	border-right: 2px solid black;
+	height: 200px;
+	width: 200px;
+	clear: left;
+	float: left;
+}
+
+.eight {
+	border-right: 2px solid black;
+	height: 200px;
+	width: 200px;
+	float: left;
+}
+
+.nine {
+	height: 200px;
+	width: 200px;
+	float: left;
+}
+
+img {
+	height: 200px;
+	width: 200px;
+}
+
+.xClass {
+	
+}
