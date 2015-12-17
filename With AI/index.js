@@ -4,6 +4,8 @@ $(document).ready(function() {
 
 	console.log("JS file loaded!");
 
+var currentPlayer = 1;
+currentPlayer = currentPlayer %2;
 
 //essentially, this is an array of arrays
 var board = [
@@ -55,58 +57,73 @@ var winningCombos = [
 [box3, box5, box7]
 ];
 
-// I tried to write a function that allowed JS to 
-// if (winningCombos[i].className === "xClass") {
-// 	alert("Player 1 has won!!!!");
-// 	}
-// else if (winningCombos[i].className === "oClass") {
-// 	alert("Player 2 has won!!!!");
-// }
-// var winCheck = function() {
-// // 	for (var i = 0; i < winningCombos.length; i++) {
-// // 		for (var j = 0; j <winningCombos[i].length; j++) {
-// // 			console.log(winningCombos[i][j]);
-// // 		}
-// // 	}
-// // }
-// 	if (winningCombos[0].hasClass("xClass") === true) {
-// 	alert("Player 1 has won!");
-// 	}
-// }
+alert("Player 1, you will be X. The computer will be O. When it's your turn, please click on the square you would like to place your symbols. Three in a row wins!");
+alert("It's your turn!");
 
-// winCheck();
-
-alert("Player 1 will be X. Player 2 will be O. Taking turns, please click on the square you would like to place your symbols. Three in a row wins!");
-alert("It's Player 1's turn!");
-
-//the main issue I keep running into is that whenever I add X on a div, both an xClass and an oClass are added.
-
-//I kind of believe that there's a better way to take turns than this...
-
-//here is an alternate solution for getting the X and O's on there.
-
-$('.grid').on('click', function () {
+var humanMove = function() {
+  $('.grid').on('click', function () {
   if ($(this).children().length === 0 ) {
-    click += 1;
-    if (click === 1) {
+    // click += 1;
+    // if (click === 1 || click % 2 === 1) {
       $(this).html("<img src = 'x.gif' />");
       $(this).addClass("xClass");
     }
-    else if (click % 2 === 1 ) {
-      $(this).html("<img src = 'x.gif' />");
-      $(this).addClass("xClass");
-    }
-    else {
-      $(this).html("<img src = 'crazyo.gif' />");
-      $(this).addClass("oClass");
-    }
-  }
   else {
     alert("That box already has an element in it!");
     }
-  checkIfWon();
-  checkIfDraw();
   })
+}
+
+
+var placeRandom = Math.floor(Math.random() * 9) + 1;
+var chosenBox = "box" + placeRandom;
+
+var computerMove = function() {
+  almostWon();
+}
+  // chosenBox.html("<img src = 'crazyo.gif' />");
+  // $(this).addClass("oClass");
+//   var checkHuman === almostWon();
+//     if !(almostWon)
+//   }
+//   else {
+//     $('location').html(Opiece);
+
+//   }
+//   }
+
+// winningCombos.forEach(function(combo) {
+// //try to find either an empty winning combo or block the
+// })
+ // can human win next turn?
+
+var almostWon = function() {
+  winningComnos.forEach(function(combo) {
+    var comboCheck = 0;
+    var blanks = 0;
+    var target;
+    combo.forEach(function(square) {
+        if (square.hasClass("xClass") < 2 ) {
+            comboCheck++;
+      } else {
+          var blank = !(square.hasClass("xClass")); 
+            blank.html("<img src = 'crazyo.gif' />");
+        }
+      })
+    if (comboCheck === 2 && blank === 1) {
+      return blank;
+    } else {
+    return false;
+  }
+})
+}
+
+//   // if (box1.hasClass('xClass') && box2.hasClass('xClass')) {
+//   //       box3.html("<img src = 'crazyo.gif' />");
+//       }
+//   }
+// }
+
 
 var player1wins = function() {
   song.play();
@@ -121,38 +138,6 @@ var player2wins = function() {
 }
 
 var checkIfWon = function() {
-
-  // var currentPlayer = (whoever's turn it is)
-
-  // $(".oClass").hasClass("two") && $(".oClass").hasClass("three")
-  var winningCombos = [
-[box1, box2, box3], 
-[box4, box5, box6], 
-[box7, box8, box9],
-[box1, box4, box7],
-[box2, box5, box8],
-[box3, box6, box9],
-[box1, box5, box9],
-[box3, box5, box7]
-];
-
-  // box1.on("click", function() {
-  //   var thisClass = $(this).attr("class").split(" ")[2]
-  //   if ((box2.hasClass(thisClass)) && (box3.hasClass(thisClass))) ||
-        
-  //    {
-
-  //     // this player wins
-
-  //   }
-  // })
-
-
-  // SOMETHING LIKE:
-  winningCombos.forEach(function(winCombo){
-
-  })
-
   if ( box1.hasClass("xClass") && box2.hasClass("xClass") && box3.hasClass("xClass")) {
     player1wins();
   }
@@ -203,11 +188,15 @@ var checkIfWon = function() {
   }
 }
 
-var checkIfDraw = function() {
-  if (click === 9 && checkIfWon === false) {
-    alert("It's a draw! No one has won!");
-  }
+var run = function() {
+  humanMove();
+  checkIfWon();
+  computerMove();
+  checkIfWon();
 }
+
+run();
+
 var song = new Audio("starwars-c_kjllrden.mp3");
 
 // I tried to write a function that allowed JS to iterate through the winningCombos arrray, I ended up not using it
@@ -285,6 +274,7 @@ var song = new Audio("starwars-c_kjllrden.mp3");
 //     },
 // board[x] = currentPlayer
 //   })
+
 
 });
 
