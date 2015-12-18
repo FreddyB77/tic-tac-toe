@@ -4,9 +4,6 @@ $(document).ready(function() {
 
 	console.log("JS file loaded!");
 
-var currentPlayer = 1;
-currentPlayer = currentPlayer %2;
-
 //essentially, this is an array of arrays
 var board = [
   [1, 2, 3],
@@ -62,11 +59,13 @@ alert("It's your turn!");
 
 var humanMove = function() {
   $('.grid').on('click', function () {
+    checkIfWon();
   if ($(this).children().length === 0 ) {
     // click += 1;
     // if (click === 1 || click % 2 === 1) {
       $(this).html("<img src = 'x.gif' />");
       $(this).addClass("xClass");
+      setTimeout(computerMove,500);
     }
   else {
     alert("That box already has an element in it!");
@@ -74,13 +73,54 @@ var humanMove = function() {
   })
 }
 
-
-var placeRandom = Math.floor(Math.random() * 9) + 1;
-var chosenBox = "box" + placeRandom;
-
-var computerMove = function() {
-  almostWon();
+var boxArray = [box1, box2, box3, box4, box5, box6, box7, box8, box9];
+var boardFull = function(){
+  for (var i=0; i<boxArray.length; i++){
+    if (boxArray[i].children().length === 0){
+      return false;
+    }
+  }
+  // boxArray.some(function(box){
+  //   console.log(box.children().length)
+  //   if (box.children().length === 0){
+  //     return false;
+  //   } 
+  // });
+  return true;
 }
+var computerMove = function() {
+    checkIfWon();
+  // if (almostWon() === false) {
+    var boardCheck = boardFull();
+    if (boardCheck){
+      console.log('Board is full!')
+      return;
+    }
+    console.log("I moved")
+    var randomMove = Math.floor(Math.random() * 8) + 1;
+    var boxToCheck = boxArray[randomMove];
+    if (boxToCheck.children().length > 0) {
+          console.log("boardcheck: ", boardCheck)
+          computerMove();
+        }
+    else {
+      boxToCheck.html("<img src = 'crazyo.gif' />");
+      boxToCheck.addClass("oClass");
+    }
+  }
+
+    // var winningCombos = [
+    // [box1, box2, box3], 
+    // [box4, box5, box6], 
+    // [box7, box8, box9],
+    // [box1, box4, box7],
+    // [box2, box5, box8],
+    // [box3, box6, box9],
+    // [box1, box5, box9],
+    // [box3, box5, box7]
+    // ];
+    // var winwinningCombos.forEach
+
   // chosenBox.html("<img src = 'crazyo.gif' />");
   // $(this).addClass("oClass");
 //   var checkHuman === almostWon();
@@ -98,16 +138,27 @@ var computerMove = function() {
  // can human win next turn?
 
 var almostWon = function() {
-  winningComnos.forEach(function(combo) {
+  var winningCombos = [
+    [box1, box2, box3], 
+    [box4, box5, box6], 
+    [box7, box8, box9],
+    [box1, box4, box7],
+    [box2, box5, box8],
+    [box3, box6, box9],
+    [box1, box5, box9],
+    [box3, box5, box7]
+    ];
+  winningCombos.forEach(function(combo) {
     var comboCheck = 0;
-    var blanks = 0;
+    var blank = 0;
     var target;
     combo.forEach(function(square) {
         if (square.hasClass("xClass") < 2 ) {
             comboCheck++;
       } else {
           var blank = !(square.hasClass("xClass")); 
-            blank.html("<img src = 'crazyo.gif' />");
+          blank += 1;
+          blank.html("<img src = 'crazyo.gif' />");
         }
       })
     if (comboCheck === 2 && blank === 1) {
@@ -117,82 +168,99 @@ var almostWon = function() {
   }
 })
 }
+var horizontalWin = function() {
+    if ( box1.hasClass("xClass") && box2.hasClass("xClass") && box3.hasClass("xClass")) {
+    return player1wins(); 
+  }
+    else if ( box1.hasClass("oClass") && box2.hasClass("oClass") && box3.hasClass("oClass")) {
+    return player2wins();
+  }
+    else if ( box4.hasClass("xClass") && box5.hasClass("xClass") && box6.hasClass("xClass")) {
+    return player1wins(); 
+  }
+    else if ( box4.hasClass("oClass") && box5.hasClass("oClass") && box6.hasClass("oClass")) {
+    return player2wins(); 
+  }
+    else if ( box7.hasClass("xClass") && box8.hasClass("xClass") && box9.hasClass("xClass")) {
+    return player1wins(); 
+  }
+    else if ( box7.hasClass("oClass") && box8.hasClass("oClass") && box9.hasClass("oClass")) {
+    return player2wins(); 
+  }
+  return false;
+}
+var verticalWin = function() {
+    if ( box1.hasClass("xClass") && box4.hasClass("xClass") && box7.hasClass("xClass")) {
+    return player1wins(); 
+  }
+    else if ( box1.hasClass("oClass") && box4.hasClass("oClass") && box7.hasClass("oClass")) {
+    return player2wins();
+  }
+    else if ( box2.hasClass("xClass") && box5.hasClass("xClass") && box8.hasClass("xClass")) {
+   return  player1wins();
+  }
+    else if ( box2.hasClass("oClass") && box5.hasClass("oClass") && box8.hasClass("oClass")) {
+    return player2wins();
+  }
+    else if ( box3.hasClass("xClass") && box6.hasClass("xClass") && box9.hasClass("xClass")) {
+    return player1wins();
+  }
+    else if ( box3.hasClass("oClass") && box6.hasClass("oClass") && box9.hasClass("oClass")) {
+    return player2wins();
+  }
+  return false;
+}
+var diagonalWin = function() {
+  if ( box1.hasClass("xClass") && box5.hasClass("xClass") && box9.hasClass("xClass")) {
+    return player1wins(); 
+  }
+  else if( box1.hasClass("oClass") && box5.hasClass("oClass") && box9.hasClass("oClass")) {
+    return player2wins(); 
+  }
+  else if ( box3.hasClass("xClass") && box5.hasClass("xClass") && box7.hasClass("xClass")) {
+    return player1wins(); 
+  }
+  else if ( box3.hasClass("oClass") && box5.hasClass("oClass") && box7.hasClass("oClass")) {
+    return player2wins(); 
+  }
+  return false;
+}
 
-//   // if (box1.hasClass('xClass') && box2.hasClass('xClass')) {
-//   //       box3.html("<img src = 'crazyo.gif' />");
-//       }
-//   }
-// }
-
+var checkIfWon = function() {
+  
+  if(horizontalWin() || verticalWin() || diagonalWin()){
+    location.reload()
+  }
+}
 
 var player1wins = function() {
   song.play();
   alert("Player 1 wins!");
-  location.reload();
+  //location.reload();
+  return true;
 }
 
 var player2wins = function() {
   song.play();
   alert("Player 2 wins!");
-  location.reload();
+  //location.reload();
+  return true;
 }
 
-var checkIfWon = function() {
-  if ( box1.hasClass("xClass") && box2.hasClass("xClass") && box3.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box4.hasClass("xClass") && box5.hasClass("xClass") && box6.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box7.hasClass("xClass") && box8.hasClass("xClass") && box9.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box1.hasClass("xClass") && box7.hasClass("xClass") && box7.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box2.hasClass("xClass") && box5.hasClass("xClass") && box8.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box3.hasClass("xClass") && box6.hasClass("xClass") && box9.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box1.hasClass("xClass") && box5.hasClass("xClass") && box9.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box3.hasClass("xClass") && box5.hasClass("xClass") && box7.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box1.hasClass("oClass") && box2.hasClass("oClass") && box3.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box4.hasClass("oClass") && box5.hasClass("oClass") && box6.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box7.hasClass("oClass") && box8.hasClass("oClass") && box9.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box1.hasClass("oClass") && box7.hasClass("oClass") && box7.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box2.hasClass("oClass") && box5.hasClass("oClass") && box8.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box3.hasClass("oClass") && box6.hasClass("oClass") && box9.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box1.hasClass("oClass") && box5.hasClass("oClass") && box9.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box3.hasClass("oClass") && box5.hasClass("oClass") && box7.hasClass("oClass")) {
-    player2wins();
-  }
-}
+// var checkIfDraw = function() {
+//   var boxCheck = boxArray.every(function(box) {
+//     if (box.children().length > 1); {
+//         alert("It's a draw! No one has won!");
+//     }
+//   })
+//   boxCheck();
+// }
 
 var run = function() {
-  humanMove();
-  checkIfWon();
-  computerMove();
-  checkIfWon();
+    humanMove();
+    //computerMove();
+    //checkIfWon();
+    // checkIfDraw();
 }
 
 run();

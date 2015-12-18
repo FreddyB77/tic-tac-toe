@@ -1,43 +1,45 @@
 body {
 	background: url(faded_purple.jpg);
-	font-family: Georgia;
+	font-family: Helvetica;
+	color: pink;
 }
 
 h1 {
 	text-align: center;
+	color: pink;
 }
 
 .container {
-	width: 75%;
+	width: 650px;
 	margin: 0 auto;
 }
 
 .one {
 	float:left;
-	border-bottom: 2px solid black;
-	border-right: 2px solid black;
+	border-bottom: 5px solid pink;
+	border-right: 5px solid pink;
 	height: 200px;
 	width: 200px;
 }
 
 .two {
 	float: left;
-	border-bottom: 2px solid black;
-	border-right: 2px solid black;
+	border-bottom: 5px solid pink;
+	border-right: 5px solid pink;
 	height: 200px;
 	width: 200px;
 }
 
 .three {
 	float: left;
-	border-bottom: 2px solid black;
+	border-bottom: 5px solid pink;
 	height: 200px;
 	width: 200px;;
 }
 
 .four {
-	border-bottom: 2px solid black;
-	border-right: 2px solid black;
+	border-bottom: 5px solid pink;
+	border-right: 5px solid pink;
 	height: 200px;
 	width: 200px;
 	clear: left;
@@ -46,22 +48,22 @@ h1 {
 }
 
 .five {
-	border-bottom: 2px solid black;
-	border-right: 2px solid black;
+	border-bottom: 5px solid pink;
+	border-right: 5px solid pink;
 	height: 200px;
 	width: 200px;
 	float: left;
 }
 
 .six {
-	border-bottom: 2px solid black;
+	border-bottom: 5px solid pink;
 	height: 200px;
 	width: 200px;
 	float: left;
 }
 
 .seven {
-	border-right: 2px solid black;
+	border-right: 5px solid pink;
 	height: 200px;
 	width: 200px;
 	clear: left;
@@ -69,7 +71,7 @@ h1 {
 }
 
 .eight {
-	border-right: 2px solid black;
+	border-right: 5px solid pink;
 	height: 200px;
 	width: 200px;
 	float: left;

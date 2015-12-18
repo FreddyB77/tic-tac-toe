@@ -1,6 +1,6 @@
 "use strict";
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
 	console.log("JS file loaded!");
 
@@ -75,9 +75,49 @@ var winningCombos = [
 // }
 
 // winCheck();
+    // var clock = 10;
+    // var countdownId = 0;
+
+    //   function start() {
+    //         //Start clock
+    //         countdownId = setInterval(countdown, 1000);
+    //     }
+
+    //     function countdown(){
+    //         if(clock > 0){
+    //             clock = clock - 1;
+    //             $('#timer').html(clock);
+    //         }
+    //         else {
+    //             //Stop clock
+    //             clearInterval(countdownId);
+    //         }
+    //     }
+
+var clockStart = 10;
+var clockEnd;
+  
+var start = function() {
+
+  clockEnd = setInterval(countdown, 1000);
+  if (clockStart === 0) {
+    alert("You took too long to put in your answer! GAME OVER!");
+  }
+  }
+
+var countdown = function() {
+  if (clockStart > 0) {
+    clockStart = clockStart - 1;
+    $('#timer').html(clockStart);
+      }
+  // else if ($('.grid')).on('click', function() {
+  //   clearInterval(clockEnd);
+  // })
+}
 
 alert("Player 1 will be X. Player 2 will be O. Taking turns, please click on the square you would like to place your symbols. Three in a row wins!");
 alert("It's Player 1's turn!");
+start();
 
 //the main issue I keep running into is that whenever I add X on a div, both an xClass and an oClass are added.
 
@@ -86,18 +126,20 @@ alert("It's Player 1's turn!");
 //here is an alternate solution for getting the X and O's on there.
 
 $('.grid').on('click', function () {
+
+  start();
   if ($(this).children().length === 0 ) {
     click += 1;
     if (click === 1) {
-      $(this).html("<img src = 'x.gif' />");
+      $(this).html("<img src = 'pinkcloudx.gif' />");
       $(this).addClass("xClass");
     }
     else if (click % 2 === 1 ) {
-      $(this).html("<img src = 'x.gif' />");
+      $(this).html("<img src = 'pinkcloudx.gif' />");
       $(this).addClass("xClass");
     }
     else {
-      $(this).html("<img src = 'crazyo.gif' />");
+      $(this).html("<img src = 'spino.gif' />");
       $(this).addClass("oClass");
     }
   }
@@ -120,8 +162,6 @@ var player2wins = function() {
   location.reload();
 }
 
-var checkIfWon = function() {
-
   // var currentPlayer = (whoever's turn it is)
 
   // $(".oClass").hasClass("two") && $(".oClass").hasClass("three")
@@ -139,7 +179,7 @@ var checkIfWon = function() {
   // box1.on("click", function() {
   //   var thisClass = $(this).attr("class").split(" ")[2]
   //   if ((box2.hasClass(thisClass)) && (box3.hasClass(thisClass))) ||
-        
+
   //    {
 
   //     // this player wins
@@ -149,63 +189,74 @@ var checkIfWon = function() {
 
 
   // SOMETHING LIKE:
-  winningCombos.forEach(function(winCombo){
+  // winningCombos.forEach(function(winCombo){
 
-  })
+  // })
 
-  if ( box1.hasClass("xClass") && box2.hasClass("xClass") && box3.hasClass("xClass")) {
-    player1wins();
+var checkIfWon = function() {
+  var horizontalWin = function() {
+    if ( box1.hasClass("xClass") && box2.hasClass("xClass") && box3.hasClass("xClass")) {
+    player1wins(); 
   }
-  else if ( box4.hasClass("xClass") && box5.hasClass("xClass") && box6.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box7.hasClass("xClass") && box8.hasClass("xClass") && box9.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box1.hasClass("xClass") && box7.hasClass("xClass") && box7.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box2.hasClass("xClass") && box5.hasClass("xClass") && box8.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box3.hasClass("xClass") && box6.hasClass("xClass") && box9.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box1.hasClass("xClass") && box5.hasClass("xClass") && box9.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box3.hasClass("xClass") && box5.hasClass("xClass") && box7.hasClass("xClass")) {
-    player1wins();
-  }
-  else if ( box1.hasClass("oClass") && box2.hasClass("oClass") && box3.hasClass("oClass")) {
+    else if ( box1.hasClass("oClass") && box2.hasClass("oClass") && box3.hasClass("oClass")) {
     player2wins();
   }
-  else if ( box4.hasClass("oClass") && box5.hasClass("oClass") && box6.hasClass("oClass")) {
+    else if ( box4.hasClass("xClass") && box5.hasClass("xClass") && box6.hasClass("xClass")) {
+    player1wins(); 
+  }
+    else if ( box4.hasClass("oClass") && box5.hasClass("oClass") && box6.hasClass("oClass")) {
+    player2wins(); 
+  }
+    else if ( box7.hasClass("xClass") && box8.hasClass("xClass") && box9.hasClass("xClass")) {
+    player1wins(); 
+  }
+    else if ( box7.hasClass("oClass") && box8.hasClass("oClass") && box9.hasClass("oClass")) {
+    player2wins(); 
+  }
+}
+  var verticalWin = function() {
+    if ( box1.hasClass("xClass") && box4.hasClass("xClass") && box7.hasClass("xClass")) {
+    player1wins(); 
+  }
+    else if ( box1.hasClass("oClass") && box4.hasClass("oClass") && box7.hasClass("oClass")) {
     player2wins();
   }
-  else if ( box7.hasClass("oClass") && box8.hasClass("oClass") && box9.hasClass("oClass")) {
+    else if ( box2.hasClass("xClass") && box5.hasClass("xClass") && box8.hasClass("xClass")) {
+    player1wins();
+  }
+    else if ( box2.hasClass("oClass") && box5.hasClass("oClass") && box8.hasClass("oClass")) {
     player2wins();
   }
-  else if ( box1.hasClass("oClass") && box7.hasClass("oClass") && box7.hasClass("oClass")) {
-    player2wins();
+    else if ( box3.hasClass("xClass") && box6.hasClass("xClass") && box9.hasClass("xClass")) {
+    player1wins();
   }
-  else if ( box2.hasClass("oClass") && box5.hasClass("oClass") && box8.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box3.hasClass("oClass") && box6.hasClass("oClass") && box9.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box1.hasClass("oClass") && box5.hasClass("oClass") && box9.hasClass("oClass")) {
-    player2wins();
-  }
-  else if ( box3.hasClass("oClass") && box5.hasClass("oClass") && box7.hasClass("oClass")) {
+    else if ( box3.hasClass("oClass") && box6.hasClass("oClass") && box9.hasClass("oClass")) {
     player2wins();
   }
 }
+var diagonalWin = function() {
+  if ( box1.hasClass("xClass") && box5.hasClass("xClass") && box9.hasClass("xClass")) {
+    player1wins(); 
+  }
+  else if( box1.hasClass("oClass") && box5.hasClass("oClass") && box9.hasClass("oClass")) {
+    player2wins(); 
+  }
+  else if ( box3.hasClass("xClass") && box5.hasClass("xClass") && box7.hasClass("xClass")) {
+    player1wins(); 
+  }
+  else if ( box3.hasClass("oClass") && box5.hasClass("oClass") && box7.hasClass("oClass")) {
+    player2wins(); 
+  }
+}
+horizontalWin();
+verticalWin();
+diagonalWin();
+}
 
 var checkIfDraw = function() {
-  if (click === 9 && checkIfWon === false) {
+  if (click === 9) {
     alert("It's a draw! No one has won!");
+    location.reload();
   }
 }
 var song = new Audio("starwars-c_kjllrden.mp3");
@@ -286,7 +337,7 @@ var song = new Audio("starwars-c_kjllrden.mp3");
 // board[x] = currentPlayer
 //   })
 
-});
+// });
 
 
 
