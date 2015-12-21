@@ -1,0 +1,42 @@
+body {
+	background: url(faded_purple.jpg);
+	font-family: Helvetica;
+	color: pink;
+
+}
+
+h1 {
+	text-align: center;
+	color: pink;
+	animation: pulse 5s infinite;
+}
+
+.container {
+	margin: 0 auto;
+	width: 150px;
+}
+
+.twoplayers {
+	width: 100px;
+	height: 50px;
+	background-color: pink;
+	text-align: center;
+	display: block;
+}
+
+.withAI {
+	width: 100px;
+	height: 50px;
+	background-color: pink;
+	text-align: center;
+	display: block;
+}
+
+button {
+	margin: 0 auto;
+
+}
+
+a {
+	text-decoration: none;
+}

@@ -2,6 +2,7 @@ body {
 	background: url(faded_purple.jpg);
 	font-family: Helvetica;
 	color: pink;
+	position: relative;
 }
 
 h1 {
@@ -97,6 +98,12 @@ img {
 }
 
 .winners {
+	width: 100px;
+	height: 50px;
+	border: 2px solid pink;
 	clear: left;
-	margin: 0 auto;
+	display: inline;
+	background-color: pink;
 }
+
+
