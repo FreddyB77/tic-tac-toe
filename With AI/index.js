@@ -60,6 +60,7 @@ alert("It's your turn!");
 var humanMove = function() {
   $('.grid').on('click', function () {
     checkIfWon();
+    checkIfDraw();
   if ($(this).children().length === 0 ) {
     // click += 1;
     // if (click === 1 || click % 2 === 1) {
@@ -90,6 +91,8 @@ var boardFull = function(){
 }
 var computerMove = function() {
     checkIfWon();
+    checkIfDraw();
+    almostWon();
   // if (almostWon() === false) {
     var boardCheck = boardFull();
     if (boardCheck){
@@ -166,8 +169,11 @@ var almostWon = function() {
     } else {
     return false;
   }
+  checkIfWon();
+  checkIfDraw();
 })
 }
+
 var horizontalWin = function() {
     if ( box1.hasClass("xClass") && box2.hasClass("xClass") && box3.hasClass("xClass")) {
     return player1wins(); 
@@ -233,6 +239,13 @@ var checkIfWon = function() {
   }
 }
 
+// var checkIfDraw = function() {
+//   if (click === 5) {
+//     alert("It's a draw! No one has won!");
+//     location.reload();
+//   }
+// }
+
 var player1wins = function() {
   song.play();
   alert("Player 1 wins!");
@@ -242,19 +255,19 @@ var player1wins = function() {
 
 var player2wins = function() {
   song.play();
-  alert("Player 2 wins!");
+  alert("Computer wins!");
   //location.reload();
   return true;
 }
 
-// var checkIfDraw = function() {
-//   var boxCheck = boxArray.every(function(box) {
-//     if (box.children().length > 1); {
-//         alert("It's a draw! No one has won!");
-//     }
-//   })
-//   boxCheck();
-// }
+var checkIfDraw = function() {
+  if ( box1.children().length > 0 && box2.children().length > 0 && box3.children().length > 0 && box4.children().length > 0 && box5.children().length > 0 && box6.children().length > 0 && box7.children().length > 0 && box8.children().length > 0 && box9.children().length > 0 ) {
+    checkIfWon();
+      if (checkIfWon === false) {
+        alert("It's a draw! No one wins!");
+      }
+    }
+  } 
 
 var run = function() {
     humanMove();

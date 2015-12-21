@@ -95,3 +95,8 @@ img {
 .oClass {
 
 }
+
+.winners {
+	clear: left;
+	margin: 0 auto;
+}

@@ -95,29 +95,32 @@ var winningCombos = [
     //     }
 
 var clockStart = 10;
-var clockEnd;
-  
-var start = function() {
-
-  clockEnd = setInterval(countdown, 1000);
-  if (clockStart === 0) {
-    alert("You took too long to put in your answer! GAME OVER!");
-  }
-  }
-
-var countdown = function() {
-  if (clockStart > 0) {
-    clockStart = clockStart - 1;
-    $('#timer').html(clockStart);
-      }
-  // else if ($('.grid')).on('click', function() {
-  //   clearInterval(clockEnd);
-  // })
+var clockEnd = function() {
+  setInterval(countdown, 1000);
 }
+  
+// var start = function() {
+//   if (clockStart === 0) {
+//     alert("You took too long to put in your answer! GAME OVER!");
+//     }
+//     else {
+//       countdown();
+//     }
+//   }
+
+// var countdown = function() {
+//   if (click) {
+//   clearInterval(clockEnd);
+//     }
+//     else if (clockStart > 0) {
+//     clockStart = clockStart - 1;
+//     $('#timer').html(clockStart);
+//     }
+// }
 
 alert("Player 1 will be X. Player 2 will be O. Taking turns, please click on the square you would like to place your symbols. Three in a row wins!");
 alert("It's Player 1's turn!");
-start();
+// start();
 
 //the main issue I keep running into is that whenever I add X on a div, both an xClass and an oClass are added.
 
@@ -126,8 +129,6 @@ start();
 //here is an alternate solution for getting the X and O's on there.
 
 $('.grid').on('click', function () {
-
-  start();
   if ($(this).children().length === 0 ) {
     click += 1;
     if (click === 1) {
@@ -153,12 +154,15 @@ $('.grid').on('click', function () {
 var player1wins = function() {
   song.play();
   alert("Player 1 wins!");
+  var winner = prompt("What is your name, Player 1?");
+  $('ul').append($('<li>')
   location.reload();
 }
 
 var player2wins = function() {
   song.play();
   alert("Player 2 wins!");
+  var winner = prompt("What is your name, Player 2?");
   location.reload();
 }
 
