@@ -154,15 +154,12 @@ $('.grid').on('click', function () {
 var player1wins = function() {
   song.play();
   alert("Player 1 wins!");
-  var winner = prompt("What is your name, Player 1?");
-  $('ul').append($('<li>')
   location.reload();
 }
 
 var player2wins = function() {
   song.play();
   alert("Player 2 wins!");
-  var winner = prompt("What is your name, Player 2?");
   location.reload();
 }
 
@@ -258,7 +255,7 @@ diagonalWin();
 }
 
 var checkIfDraw = function() {
-  if (click === 9) {
+  if (click === 9 && checkIfWon === false) {
     alert("It's a draw! No one has won!");
     location.reload();
   }
