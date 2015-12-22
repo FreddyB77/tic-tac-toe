@@ -55,45 +55,7 @@ var winningCombos = [
 [box3, box5, box7]
 ];
 
-// I tried to write a function that allowed JS to 
-// if (winningCombos[i].className === "xClass") {
-// 	alert("Player 1 has won!!!!");
-// 	}
-// else if (winningCombos[i].className === "oClass") {
-// 	alert("Player 2 has won!!!!");
-// }
-// var winCheck = function() {
-// // 	for (var i = 0; i < winningCombos.length; i++) {
-// // 		for (var j = 0; j <winningCombos[i].length; j++) {
-// // 			console.log(winningCombos[i][j]);
-// // 		}
-// // 	}
-// // }
-// 	if (winningCombos[0].hasClass("xClass") === true) {
-// 	alert("Player 1 has won!");
-// 	}
-// }
-
-// winCheck();
-    // var clock = 10;
-    // var countdownId = 0;
-
-    //   function start() {
-    //         //Start clock
-    //         countdownId = setInterval(countdown, 1000);
-    //     }
-
-    //     function countdown(){
-    //         if(clock > 0){
-    //             clock = clock - 1;
-    //             $('#timer').html(clock);
-    //         }
-    //         else {
-    //             //Stop clock
-    //             clearInterval(countdownId);
-    //         }
-    //     }
-
+//I tried really hard to get my timer function to work, but it didn't
 var clockStart = 10;
 var clockEnd = function() {
   setInterval(countdown, 1000);
@@ -177,22 +139,6 @@ var player2wins = function() {
 [box3, box5, box7]
 ];
 
-  // box1.on("click", function() {
-  //   var thisClass = $(this).attr("class").split(" ")[2]
-  //   if ((box2.hasClass(thisClass)) && (box3.hasClass(thisClass))) ||
-
-  //    {
-
-  //     // this player wins
-
-  //   }
-  // })
-
-
-  // SOMETHING LIKE:
-  // winningCombos.forEach(function(winCombo){
-
-  // })
 
 var checkIfWon = function() {
   var horizontalWin = function() {
@@ -255,7 +201,7 @@ diagonalWin();
 }
 
 var checkIfDraw = function() {
-  if (click === 9 && checkIfWon === false) {
+  if (click === 9) {
     alert("It's a draw! No one has won!");
     location.reload();
   }
@@ -280,7 +226,6 @@ var song = new Audio("starwars-c_kjllrden.mp3");
 //  alert("Player 1 has won!");
 //  }
 // }
-
 
 
 //from Stack Overflow, this might be able to check if any three divs have the same class xClass

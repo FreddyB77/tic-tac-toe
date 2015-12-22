@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-	console.log("JS file loaded!");
+  console.log("JS file loaded!");
 
 //essentially, this is an array of arrays
 var board = [
@@ -61,6 +61,7 @@ var humanMove = function() {
   $('.grid').on('click', function () {
     checkIfWon();
     checkIfDraw();
+    // almostWon();
   if ($(this).children().length === 0 ) {
     // click += 1;
     // if (click === 1 || click % 2 === 1) {
@@ -74,6 +75,8 @@ var humanMove = function() {
   })
 }
 
+
+// this checks whether the board is full or not
 var boxArray = [box1, box2, box3, box4, box5, box6, box7, box8, box9];
 var boardFull = function(){
   for (var i=0; i<boxArray.length; i++){
@@ -81,99 +84,142 @@ var boardFull = function(){
       return false;
     }
   }
-  // boxArray.some(function(box){
-  //   console.log(box.children().length)
-  //   if (box.children().length === 0){
-  //     return false;
-  //   } 
-  // });
+
   return true;
 }
 var computerMove = function() {
     checkIfWon();
     checkIfDraw();
-    almostWon();
+    console.log("making new move")
+    // we just rewrote the almostWon function to do its own jquery appending
+    //therefore, maybe we need to test for whether it needs to fire?
+    
   // if (almostWon() === false) {
     var boardCheck = boardFull();
     if (boardCheck){
       console.log('Board is full!')
       return;
+    } else {
+      console.log("I moved")
+      var blockMove = almostWonMove();
+      console.log(blockMove)
+
+      if (blockMove !== false) {
+        console.log("blocking");
+        addOClass(blockMove);
+        checkIfWon();
+        checkIfDraw();
+      } else {
+        console.log("made random move")
+        randCompMove();
+        checkIfWon();
+        checkIfDraw();
+      }
     }
-    console.log("I moved")
+} 
+
+
+// we're going to make randomMove it's own function
+
+var randCompMove = function() {
     var randomMove = Math.floor(Math.random() * 8) + 1;
     var boxToCheck = boxArray[randomMove];
     if (boxToCheck.children().length > 0) {
-          console.log("boardcheck: ", boardCheck)
-          computerMove();
-        }
-    else {
-      boxToCheck.html("<img src = 'crazyo.gif' />");
-      boxToCheck.addClass("oClass");
+        console.log("boardcheck: ", boardFull());
+        randCompMove();
+    } else {
+        addOClass(boxToCheck)
     }
   }
 
-    // var winningCombos = [
-    // [box1, box2, box3], 
-    // [box4, box5, box6], 
-    // [box7, box8, box9],
-    // [box1, box4, box7],
-    // [box2, box5, box8],
-    // [box3, box6, box9],
-    // [box1, box5, box9],
-    // [box3, box5, box7]
-    // ];
-    // var winwinningCombos.forEach
-
-  // chosenBox.html("<img src = 'crazyo.gif' />");
-  // $(this).addClass("oClass");
-//   var checkHuman === almostWon();
-//     if !(almostWon)
-//   }
-//   else {
-//     $('location').html(Opiece);
-
-//   }
-//   }
-
-// winningCombos.forEach(function(combo) {
-// //try to find either an empty winning combo or block the
-// })
- // can human win next turn?
-
-var almostWon = function() {
-  var winningCombos = [
-    [box1, box2, box3], 
-    [box4, box5, box6], 
-    [box7, box8, box9],
-    [box1, box4, box7],
-    [box2, box5, box8],
-    [box3, box6, box9],
-    [box1, box5, box9],
-    [box3, box5, box7]
-    ];
-  winningCombos.forEach(function(combo) {
-    var comboCheck = 0;
-    var blank = 0;
-    var target;
-    combo.forEach(function(square) {
-        if (square.hasClass("xClass") < 2 ) {
-            comboCheck++;
-      } else {
-          var blank = !(square.hasClass("xClass")); 
-          blank += 1;
-          blank.html("<img src = 'crazyo.gif' />");
-        }
-      })
-    if (comboCheck === 2 && blank === 1) {
-      return blank;
-    } else {
-    return false;
-  }
-  checkIfWon();
-  checkIfDraw();
-})
+var addOClass = function(box) {
+  box.html("<img src = 'crazyo.gif' />");
+  box.addClass("oClass");
 }
 
+var almostWonMove = function() {
+    var winningCombos = [
+      [box1, box2, box3], 
+      [box4, box5, box6], 
+      [box7, box8, box9],
+      [box1, box4, box7],
+      [box2, box5, box8],
+      [box3, box6, box9],
+      [box1, box5, box9],
+      [box3, box5, box7]
+      ];
+
+    var potentialCombos = []
+
+    $(".xClass").each(function(square){
+        console.log("found xClass")
+
+        var match = $(".xClass")[0]
+
+        winningCombos.forEach(function(combo){
+          console.log(combo)
+          debugger
+          // this is nick forgetting how javascript works
+          // it loses track of the variable through the loop, because of assignments
+          if(combo.indexOf(match) > 0){
+            potentialCombos.push(combo);
+            console.log(potentialCombos);
+          }
+        })
+    })
+
+    return false
+}
+
+//Nick and I worked very hard to try to find a function that would iterate through my winningCombos to produce an AI with actual strategy, but we couldn't quite get to it
+    // winningCombos.forEach(function(square) {
+    //     var xClassArr = square;
+
+    //     console.log("testing new combo")
+
+    //     var winningCombo = []
+
+    //     square.forEach(function(combobox) {          
+  
+    //       // console.log(combobox)          
+    //       if (combobox.hasClass("xClass") == true) {
+    //           winningCombo.push(combobox)
+    //       }
+
+    //       console.log(winningCombo)
+
+    //       if (winningCombo.length == 2) {
+    //         var firstIndex = square.indexOf(winningCombo[0])
+    //         xClassArr.splice(firstIndex, 1)
+    //         var secondIndex = xClassArr.indexOf(winningCombo[1])
+    //         xClassArr.splice(secondIndex, 1)
+
+    //         return xClassArr[0]
+    //         // filter the square for the value that doesn't match and return that one
+    //       }
+    //     })
+
+    // })
+
+//   return false
+
+// }
+
+// else { 
+//           blank.html("<img src = 'crazyo.gif' />");
+//         }
+//       })
+//     if (comboCheck === 2 && blank === 1) {
+//       return blank;
+//     } else {
+//     return false;
+//   }
+//   checkIfWon();
+//   checkIfDraw();
+// })
+// }
+
+//here is the Win function
 var horizontalWin = function() {
     if ( box1.hasClass("xClass") && box2.hasClass("xClass") && box3.hasClass("xClass")) {
     return player1wins(); 
@@ -280,81 +326,22 @@ run();
 
 var song = new Audio("starwars-c_kjllrden.mp3");
 
-// I tried to write a function that allowed JS to iterate through the winningCombos arrray, I ended up not using it
-// if (winningCombos[i].className === "xClass") {
-//  alert("Player 1 has won!!!!");
-//  }
-// else if (winningCombos[i].className === "oClass") {
-//  alert("Player 2 has won!!!!");
-// }
-// var winCheck = function() {
-// //   for (var i = 0; i < winningCombos.length; i++) {
-// //     for (var j = 0; j <winningCombos[i].length; j++) {
-// //       console.log(winningCombos[i][j]);
-// //     }
-// //   }
-// // }
-//  if (winningCombos[0].hasClass("xClass") === true) {
-//  alert("Player 1 has won!");
-//  }
-// }
 
 
 
-//from Stack Overflow, this might be able to check if any three divs have the same class xClass
-// if ($('.grid').hasClass("xClass").length == 3) {
-//             console.log("same");
-//           }
-//this is the solution I was using before, which works. I'll try to find a more succint solution...
-// $('.grid').on('click', function () {
-// 	if ($(this).children().length === 0 ) {
-// 		click += 1;
-// 		if (click === 1 ) {
-// 			$(this).html("<img src = 'x.gif' />");
-// 			$(this).addClass("xClass");
-// 		}
-// 		else {
-// 			$(this).html("<img src = 'crazyo.gif' />");
-// 		} 	$(this).addClass("oClass");
-// 	}
-// 	else {
-// 		alert("That box already has an element in it!");
-// 		}
-// 	})
 
-//another response from stack overflow gave this suggestion, which is actually pretty good, if it works
-// function checkIfWon(symbol) {
-//     for (var i = 0; i < winningCombos.length; i++) {
-//         var hits = 0;
-//         for (var j = 0; j < 3; j++) {
-//            if (winningCombos[i][j].hasClass("xClass")) {
-//             alert("Player 2 wins!");
-//             hits++;
-//            } else {
-//                break; // no need to check this combo on
-//            }
-//         }
-//         if (hits === 3) {
-//             // we got a winning combo!
-//             return true;
-//         } else {
-//           return false;
-//         }
-//       }
-//     }
 
-//Time to write an AI function
-// AI
-//choose symbol with confirm box with var humanPlayer, compPlayer
-//startGame(humanPlayer, computerPlayer);
-//make a function for each object (makeMove
 
-//   var humanPlayer = {
-//      makeMove: function() {
-//        var
-//     },
-// board[x] = currentPlayer
-//   })
+
+
+
+
+
+
+
+
+
+
 
 
 });

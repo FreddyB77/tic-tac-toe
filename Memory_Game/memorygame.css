@@ -1,0 +1,13 @@
+body {
+	background: url(steampunk.jpeg);
+}
+
+img {
+	width: 125px;
+	height: 200px;
+}
+
+.card {
+	display: inline;
+	padding: 5px;
+}
