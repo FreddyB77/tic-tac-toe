@@ -17,7 +17,7 @@ I used HTML, CSS, and JavaScript/jQuery to create this game. I had just been tau
 
 <h2> Sample Screenshots </h2>
 <p> With AI </p>
-<img src = "http://i.imgur.com/HjntZ1p.png" alt = "ai">
+<img src = "http://i.imgur.com/Y6iTK4W.png?1" alt = "ai">
 
 <p> Two Player Mode </p>
 <img src = "http://i.imgur.com/Y6iTK4W.png?1" alt = "2p">
