@@ -1,4 +1,4 @@
-# Tic-Tac-Toe by A.F. Perez
+# Tic-Tac-Toe
 
 Play the classic game of Tic-Tac-Toe. You can either play with 2 players or with an AI.
 This game was created as my first project for the General Assembly Web Development Immersive. 
@@ -14,5 +14,13 @@ I used HTML, CSS, and JavaScript/jQuery to create this game. I had just been tau
 ## Included in both versions of the game
 
 [Star Wars Cantina Theme](http://www.televisiontunes.com/Star_Wars_-_Cantina_Song.html Star Wars Cantina Theme)
+
+<h2> Sample Screenshots </h2>
+<p> With AI </p>
+<img src = "http://i.imgur.com/HjntZ1p.png?2" alt = "ai">
+
+<p> Two Player Mode </p>
+<img src = "http://i.imgur.com/Y6iTK4W.png?1" alt = "2p">
+
 
 
