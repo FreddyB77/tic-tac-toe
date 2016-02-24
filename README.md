@@ -20,7 +20,7 @@ I used HTML, CSS, and JavaScript/jQuery to create this game. I had just been tau
 <img src = "http://i.imgur.com/HjntZ1p.png" alt = "ai">
 
 <p> Two Player Mode </p>
-<img src = "http://i.imgur.com/Y6iTK4W.png" alt = "2p">
+<img src = "http://i.imgur.com/Y6iTK4W.png?1" alt = "2p">
 
 
 
