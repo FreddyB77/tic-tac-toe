@@ -12,7 +12,7 @@ Play the classic game of Tic-Tac-Toe. You can either play with 2 players or with
 -CSS3
 -JavaScript/jQuery
 
-## Included in both versions of the game
+### Included in both versions of the game
 
 [Star Wars Cantina Theme](http://www.televisiontunes.com/Star_Wars_-_Cantina_Song.html Star Wars Cantina Theme)
 
