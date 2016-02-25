@@ -8,9 +8,11 @@ Play the classic game of Tic-Tac-Toe. You can either play with 2 players or with
 -the AI for this version still needs some work. The goal is for the AI to try and block the player when there are two X's in a row. This is still a work in progress.
 
 ###Technologies Used
--HTML5
--CSS3
--JavaScript/jQuery
+<ul>
+<li> HTML </li>
+<li> CSS </li>
+<li> JavaScript/jQuery </li>
+</ul>
 
 ### Included in both versions of the game
 
